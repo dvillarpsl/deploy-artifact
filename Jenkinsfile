@@ -11,16 +11,14 @@ pipeline {
                 script {
                  [$class: 'CopyArtifact',
                  projectName: "${jobName}",
-                 filter: "${artifactName}",
-                 selector: 
-                 [$class: 'SpecificBuildSelector', 
-                 buildNumber: "${buildNumber}"]];
+                 filter: "${artifactName}"];
                  }
                 }
                 }
         stage('Verifying Artifacts') {
             steps {
                 echo "${artifactName}"
+                echo "${jobName}"
                 sh 'ls -l'
             }
         }
