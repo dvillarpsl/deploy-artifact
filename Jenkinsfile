@@ -16,7 +16,6 @@ pipeline {
                  [$class: 'SpecificBuildSelector', 
                  buildNumber: "${params.buildNumber}"]];
                  }
-                sh 'ls -l ${params.userFlag}'
                 }
                 }
     }
