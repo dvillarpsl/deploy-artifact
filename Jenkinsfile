@@ -9,12 +9,12 @@ pipeline {
         stage('Pull artifact') {
             steps {
                 script {
-                 step ([$class: 'CopyArtifact',
+                 [$class: 'CopyArtifact',
                  projectName: "${params.buildNumber}",
                  filter: "${params.artifactName}",
                  selector: 
                  [$class: 'SpecificBuildSelector', 
-                 buildNumber: "${params.buildNumber}"]]);
+                 buildNumber: "${params.buildNumber}"]];
                  }
                 sh 'ls -l ${params.userFlag}'
                 }
