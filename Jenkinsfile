@@ -5,12 +5,13 @@ pipeline {
         StringParameterValue(defaultValue: '', description: 'The job', name: 'jobName')
         StringParameterValue(defaultValue: '', description: 'The build', name: 'buildNumber')
     }
-    stage('Pull artifact') {
-        steps {
-            copyArtifacts filter: '${params.userFlag}', fingerprintArtifacts: true, projectName: '${params.jobName}', selector: specific('${params.buildNumber}')
-            sh 'ls -l ${params.userFlag}'
-        }
-    }
-    post {
+    stages {
+        stage('Pull artifact') {
+            steps {
+                copyArtifacts filter: '${params.userFlag}', fingerprintArtifacts: true, projectName: '${params.jobName}', selector: specific('${params.buildNumber}')
+                sh 'ls -l ${params.userFlag}'
+                }
+                }
+    post {}
     }
 }
