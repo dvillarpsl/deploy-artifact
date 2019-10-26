@@ -8,7 +8,14 @@ pipeline {
     stages {
         stage('Pull artifact') {
             steps {
-                copyArtifacts filter: '${params.userFlag}', fingerprintArtifacts: true, projectName: '${params.jobName}', selector: specific: '${params.buildNumber}'
+                script {
+                 step ([$class: 'CopyArtifact',
+                 projectName: "${params.buildNumber}",
+                 filter: "${params.artifactName}",
+                 selector: 
+                 [$class: 'SpecificBuildSelector', 
+                 buildNumber: "${params.buildNumber}"]]);
+                 }
                 sh 'ls -l ${params.userFlag}'
                 }
                 }
