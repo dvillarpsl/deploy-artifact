@@ -21,6 +21,7 @@ pipeline {
         stage('Verifying Artifacts') {
             steps {
                 echo "${artifactName}"
+                sh 'ls -l'
             }
         }
     }
