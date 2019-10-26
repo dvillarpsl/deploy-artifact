@@ -18,5 +18,10 @@ pipeline {
                  }
                 }
                 }
+        stage('Verifying Artifacts') {
+            steps {
+                sh 'ls -l ${params.userFlag}'
+            }
+        }
     }
 }
