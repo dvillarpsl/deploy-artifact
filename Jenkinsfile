@@ -7,17 +7,15 @@ pipeline {
     }
     stages {
         stage('Pull artifact') {
-            steps {
-                script {
-                 [$class: 'CopyArtifact',
-                 projectName: "${jobName}",
-                 filter: "${artifactName}",
-                 selector: 
-                 [$class: 'SpecificBuildSelector', 
-                 buildNumber: "${buildNumber}"]];
-                 }
-                }
-                }
+         steps {
+             script {
+                 step ([$class: 'CopyArtifact',
+                 projectName: 'movie-analyst-api',
+                 filter: "**/*.tgz",
+                 target: 'Infra']);
+             }
+         }
+        }
         stage('Verifying Artifacts') {
             steps {
                 echo "${artifactName}"
