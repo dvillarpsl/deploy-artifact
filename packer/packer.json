@@ -58,6 +58,21 @@
                 "responsible": "dvillar",
                 "project": "training"
             },
+            "tagSpecifications": [
+                {
+                    "resourceType": "",
+                    "tags": [
+                        {
+                            "key": "project",
+                            "value": "training"
+                        },
+                        {
+                            "key": "responsible",
+                            "value": "dvillar"
+                        }
+                    ]
+                }
+            ],
             "launch_block_device_mappings": [
                 {
                     "device_name": "/dev/xvda",
