@@ -53,8 +53,7 @@
             "run_tags": {
                 "responsible": "dvillar",
                 "project": "training",
-                "Runner": "Packer",
-                "Name": "movie-analyst-api-packer {{timestamp}}"
+                "Runner": "Packer"
             },
             "launch_block_device_mappings": [
                 {
