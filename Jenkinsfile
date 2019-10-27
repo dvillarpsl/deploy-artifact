@@ -10,7 +10,11 @@ pipeline {
             steps {
                 script {
                  [$class: 'CopyArtifact',
-                 projectName: "${jobName}"];
+                 projectName: "${jobName}",
+                 filter: "${artifactName}",
+                 selector: 
+                 [$class: 'SpecificBuildSelector', 
+                 buildNumber: "${params.buildNumber}"]];
                  }
                 }
                 }
