@@ -7,20 +7,20 @@
     "provisioners": [
       {
           "type": "shell",
-          "execute_command": "echo 'ubuntu' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+          "execute_command": "echo 'ec2-user' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
           "inline": [
               "sleep 30",
               "apt-add-repository ppa:ansible/ansible -y",
               "/usr/bin/apt-get update",
               "/usr/bin/apt-get -y install ansible",
-              "mkdir /home/ubuntu/node-app",
-              "chown ubuntu:ubuntu /home/ubuntu/node-app"
+              "mkdir /home/ec2-user/node-app",
+              "chown ec2-user:ec2-user /home/ec2-user/node-app"
           ]
       },
       {
         "type": "file",
         "source": ".",
-        "destination": "/home/ubuntu/node-app/"
+        "destination": "/home/ec2-user/node-app/"
       },
       {
         "type": "ansible-local",
@@ -43,8 +43,12 @@
         "most_recent": true
       },
       "instance_type": "t2.micro",
-      "ssh_username": "dvillar",
+      "ssh_username": "ec2-user",
       "ami_name": "psl-rampup-api {{timestamp}}",
+      "tags": {
+      "responsible": "dvillar@psl.com.co",
+      "project": "training"
+      },
       "launch_block_device_mappings": [{
         "device_name": "/dev/xvda",
         "volume_size": 8,
