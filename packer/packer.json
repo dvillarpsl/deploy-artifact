@@ -50,27 +50,18 @@
                 "responsible": "dvillar",
                 "project": "training"
             },
-            "tags": {
-                "responsible": "dvillar",
-                "project": "training"
-            },
             "snapshot_tags": {
                 "responsible": "dvillar",
                 "project": "training"
             },
-            "tagSpecifications": [
+            "tags": [
                 {
-                    "resourceType": "",
-                    "tags": [
-                        {
-                            "key": "project",
-                            "value": "training"
-                        },
-                        {
-                            "key": "responsible",
-                            "value": "dvillar"
-                        }
-                    ]
+                    "key": "project",
+                    "value": "training"
+                },
+                {
+                    "key": "responsible",
+                    "value": "dvillar"
                 }
             ],
             "launch_block_device_mappings": [
