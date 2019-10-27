@@ -18,7 +18,7 @@
         },
         {
             "type": "file",
-            "source": ".",
+            "source": "package/movie-analyst-api-1.0.0.tgz",
             "destination": "/home/ubuntu/node-app/"
         },
         {
