@@ -35,11 +35,11 @@
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "image-id": "ami-00eb20669e0990cb4",
+                    "image-id": "ami-0bba96c31d87e65d9",
                     "root-device-type": "ebs"
                 },
                 "owners": [
-                    "137112412989"
+                    "099720109477"
                 ],
                 "most_recent": true
             },
@@ -53,7 +53,8 @@
             "run_tags": {
                 "responsible": "dvillar",
                 "project": "training",
-                "Runner": "Packer"
+                "Runner": "Packer",
+                "Name": "movie-analyst-api-packer {{timestamp}}"
             },
             "launch_block_device_mappings": [
                 {
