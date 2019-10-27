@@ -9,10 +9,9 @@
             "execute_command": "echo 'ec2-user' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
             "inline": [
                 "sleep 30",
-                "sudo yum update",
-                "sudo yum install epel-release -y",
-                "sudo yum update",
-                "sudo pip install ansible",
+                "apt-add-repository ppa:ansible/ansible -y",
+                "/usr/bin/apt-get update",
+                "/usr/bin/apt-get -y install ansible",
                 "mkdir /home/ec2-user/node-app",
                 "chown ec2-user:ec2-user /home/ec2-user/node-app"
             ]
@@ -36,11 +35,11 @@
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "image-id": "ami-00eb20669e0990cb4",
+                    "image-id": "ami-0aa56089afc4b1b8f",
                     "root-device-type": "ebs"
                 },
                 "owners": [
-                    "137112412989"
+                    "679593333241"
                 ],
                 "most_recent": true
             },
