@@ -12,7 +12,7 @@ data "aws_ami" "node_app_ami" {
 
   filter {
     name   = "name"
-    values = ["packer-example*"]
+    values = ["psl-rampup-api*"]
   }
 
   filter {

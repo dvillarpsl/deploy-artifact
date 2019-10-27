@@ -32,21 +32,21 @@
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
-    "region": "ap-south-1",
+    "region": "us-east-1",
     "source_ami_filter": {
       "filters": {
         "virtualization-type": "hvm",
-        "name": "ubuntu/images/*ubuntu-trusty-14.04-amd64-server-*",
+        "image-id": "ami-00eb20669e0990cb4",
         "root-device-type": "ebs"
       },
-      "owners": ["099720109477"],
+      "owners": ["137112412989"],
       "most_recent": true
     },
     "instance_type": "t2.micro",
-    "ssh_username": "ubuntu",
-    "ami_name": "packer-example {{timestamp}}",
+    "ssh_username": "dvillar",
+    "ami_name": "psl-rampup-api {{timestamp}}",
     "launch_block_device_mappings": [{
-      "device_name": "/dev/sda1",
+      "device_name": "/dev/xvda",
       "volume_size": 8,
       "volume_type": "gp2",
       "delete_on_termination": true
