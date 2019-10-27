@@ -14,7 +14,7 @@ pipeline {
                  filter: "${artifactName}",
                  selector: 
                  [$class: 'SpecificBuildSelector', 
-                 buildNumber: "${params.buildNumber}"]];
+                 buildNumber: "${buildNumber}"]];
                  }
                 }
                 }
@@ -22,6 +22,7 @@ pipeline {
             steps {
                 echo "${artifactName}"
                 echo "${jobName}"
+                echo "${buildNumber}"
                 sh 'ls -l'
             }
         }
