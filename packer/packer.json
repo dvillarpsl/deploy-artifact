@@ -35,11 +35,11 @@
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "image-id": "ami-0bba96c31d87e65d9",
+                    "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-arm64-server-20190814",
                     "root-device-type": "ebs"
                 },
                 "owners": [
-                    "137112412989"
+                    "099720109477"
                 ],
                 "most_recent": true
             },
