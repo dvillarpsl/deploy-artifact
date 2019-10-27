@@ -46,7 +46,7 @@
       "ssh_username": "ec2-user",
       "ami_name": "psl-rampup-api {{timestamp}}",
       "tags": {
-      "responsible": "dvillar@psl.com.co",
+      "responsible": "dvillar",
       "project": "training"
       },
       "launch_block_device_mappings": [{
