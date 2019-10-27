@@ -9,9 +9,10 @@
             "execute_command": "echo 'ec2-user' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
             "inline": [
                 "sleep 30",
-                "apt-add-repository ppa:ansible/ansible -y",
-                "/usr/bin/apt-get update",
-                "/usr/bin/apt-get -y install ansible",
+                "sudo yum update",
+                "sudo yum install epel-release -y",
+                "sudo yum update",
+                "sudo pip install ansible",
                 "mkdir /home/ec2-user/node-app",
                 "chown ec2-user:ec2-user /home/ec2-user/node-app"
             ]
@@ -35,11 +36,11 @@
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-arm64-server-20190814",
+                    "image-id": "ami-00eb20669e0990cb4",
                     "root-device-type": "ebs"
                 },
                 "owners": [
-                    "099720109477"
+                    "137112412989"
                 ],
                 "most_recent": true
             },
@@ -53,7 +54,8 @@
             "run_tags": {
                 "responsible": "dvillar",
                 "project": "training",
-                "Runner": "Packer"
+                "Runner": "Packer",
+                "Name": "movie-analyst-api-packer {{timestamp}}"
             },
             "launch_block_device_mappings": [
                 {
