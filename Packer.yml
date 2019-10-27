@@ -35,11 +35,11 @@
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
-                    "image-id": "ami-0aa56089afc4b1b8f",
+                    "image-id": "ami-04b9e92b5572fa0d1",
                     "root-device-type": "ebs"
                 },
                 "owners": [
-                    "679593333241"
+                    "099720109477"
                 ],
                 "most_recent": true
             },
