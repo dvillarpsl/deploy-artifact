@@ -10,8 +10,7 @@ pipeline {
             steps {
                 script {
                  [$class: 'CopyArtifact',
-                 projectName: "${jobName}",
-                 filter: "${artifactName}"];
+                 projectName: "${jobName}"];
                  }
                 }
                 }
