@@ -45,7 +45,15 @@
     "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
     "ami_name": "psl-rampup-api {{timestamp}}",
+    "run_volume_tags": {
+      "responsible": "dvillar",
+      "project": "training"
+    },
     "tags": {
+    "responsible": "dvillar",
+    "project": "training"
+    },
+    "snapshot_tags": {
     "responsible": "dvillar",
     "project": "training"
     },
