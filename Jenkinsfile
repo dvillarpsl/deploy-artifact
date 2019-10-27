@@ -1,5 +1,9 @@
 pipeline {
-    agent { dockerfile true }
+    agent {
+        docker {
+            image 'goforgold/build-container:latest'
+        }
+    }
     parameters {
         string(defaultValue: '', description: 'The artifact to deploy', name: 'artifactName')
         string(defaultValue: '', description: 'The job', name: 'jobName')

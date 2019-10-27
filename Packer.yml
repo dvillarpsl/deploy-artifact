@@ -13,14 +13,14 @@
             "apt-add-repository ppa:ansible/ansible -y",
             "/usr/bin/apt-get update",
             "/usr/bin/apt-get -y install ansible",
-            "mkdir /tmp/node/node-app",
-            "chown ubuntu:ubuntu /tmp/node/node-app"
+            "mkdir /home/ubuntu/node-app",
+            "chown ubuntu:ubuntu /home/ubuntu/node-app"
         ]
     },
     {
       "type": "file",
       "source": ".",
-      "destination": "/tmp/node/node-app/"
+      "destination": "/home/ubuntu/node-app/"
     },
     {
       "type": "ansible-local",
