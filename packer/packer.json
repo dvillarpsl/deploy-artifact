@@ -50,20 +50,11 @@
                 "responsible": "dvillar",
                 "project": "training"
             },
-            "snapshot_tags": {
+            "run_tags": {
                 "responsible": "dvillar",
-                "project": "training"
+                "project": "training",
+                "Runner": "Packer"
             },
-            "tags": [
-                {
-                    "key": "project",
-                    "value": "training"
-                },
-                {
-                    "key": "responsible",
-                    "value": "dvillar"
-                }
-            ],
             "launch_block_device_mappings": [
                 {
                     "device_name": "/dev/xvda",
