@@ -27,9 +27,13 @@
       become: true
       command: npm install -g pm2
 
-    - name: Listing files
+    - name: Listing files ubuntu
       become: true
-      command: ls -l
+      command: ls -l ubuntu
+
+    - name: Listing files node-app
+      become: true
+      command: ls -l ubuntu/node-app/
     
     - name: Install APP tar
       become: true
