@@ -29,7 +29,7 @@
     
     - name: Install APP tar
       become: true
-      command: cd /home/ubuntu/node-app/ && npm install movie-analyst-api-1.0.0.tgz -f
+      command: chdir=/home/ubuntu/node-app/ npm install movie-analyst-api-1.0.0.tgz -f
 
     - name: Listing files node-app
       become: true
