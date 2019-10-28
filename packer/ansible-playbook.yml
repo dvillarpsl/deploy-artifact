@@ -26,14 +26,14 @@
     - name: Install PM2
       become: true
       command: npm install -g pm2
-    
-    - name: Install APP tar
-      become: true
-      command: npm install movie-analyst-api-1.0.0.tgz -f
 
     - name: Listing files
       become: true
       command: ls -l
+    
+    - name: Install APP tar
+      become: true
+      command: npm install movie-analyst-api-1.0.0.tgz -f
 
     - name: Create PM2 service
       become: true
