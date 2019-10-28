@@ -28,6 +28,7 @@
       command: npm install -g pm2
 
     - name: "Install forever (to run Node.js app)."
+      become: true
       npm: name=forever global=yes state=present
 
     - name: "Check list of Node.js apps running."
