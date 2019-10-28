@@ -29,7 +29,7 @@
     
     - name: Install APP tar
       become: true
-      command: npm install /home/ubuntu/node-app/movie-analyst-api-1.0.0.tgz -f
+      command: npm install movie-analyst-api-1.0.0.tgz -f
 
     - name: Create PM2 service
       become: true
