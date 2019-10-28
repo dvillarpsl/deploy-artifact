@@ -26,6 +26,14 @@
     - name: Install PM2
       become: true
       command: npm install -g pm2
+
+    - name: "Install forever (to run Node.js app)."
+      npm: name=forever global=yes state=present
+
+    - name: "Check list of Node.js apps running."
+      command: forever list
+      register: forever_list
+      changed_when: false
     
     - name: Install APP tar
       become: true
@@ -36,6 +44,7 @@
       command: ls -l /home/ubuntu/node-app/
 
     - name: Starting the APP
-      command: npm run start
+      command: forever start server.js
+      when: "forever_list.stdout.find('server.js') == -1"
       args:
         chdir: /home/ubuntu/node-app/node_modules/movie-analyst-api
