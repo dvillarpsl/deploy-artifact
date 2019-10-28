@@ -35,14 +35,7 @@
       become: true
       command: ls -l /home/ubuntu/node-app/
 
-    - name: Create PM2 service
-      become: true
-      command: env PATH=$PATH:/usr/bin pm2 startup upstart -u ubuntu --hp /home/ubuntu/node-app/node_modules/movie-analyst-api
-
-    - name: PM2 startup configuration (pm2 start)
-      command: pm2 start bin/www --name="node-app"
+    - name: Starting the APP
+      command: npm run start
       args:
         chdir: /home/ubuntu/node-app/node_modules/movie-analyst-api
-
-    - name: PM2 startup configuration (pm2 save)
-      command: pm2 save
