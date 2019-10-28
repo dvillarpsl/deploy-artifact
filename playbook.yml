@@ -26,14 +26,14 @@
     - name: Install PM2
       become: true
       command: npm install -g pm2
-
-    - name: Listing files node-app
-      become: true
-      command: ls -l /home/ubuntu/node-app/
     
     - name: Install APP tar
       become: true
       command: npm install /home/ubuntu/node-app/movie-analyst-api-1.0.0.tgz -f
+
+    - name: Listing files node-app
+      become: true
+      command: ls -l /home/ubuntu/node-app/
 
     - name: Create PM2 service
       become: true
