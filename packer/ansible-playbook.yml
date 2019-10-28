@@ -29,11 +29,11 @@
 
     - name: Listing files ubuntu
       become: true
-      command: ls -l ubuntu
+      command: ls -l /home/ubuntu/
 
     - name: Listing files node-app
       become: true
-      command: ls -l ubuntu/node-app/
+      command: ls -l /home/ubuntu/node-app/
     
     - name: Install APP tar
       become: true
