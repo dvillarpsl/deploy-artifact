@@ -29,16 +29,16 @@
     
     - name: Install APP tar
       become: true
-      command: npm install movie-analyst-api-1.0.0.tgz -f
+      command: npm install /home/ubuntu/node-app/movie-analyst-api-1.0.0.tgz -f
 
     - name: Create PM2 service
       become: true
-      command: env PATH=$PATH:/usr/bin pm2 startup upstart -u ubuntu --hp /home/ubuntu
+      command: env PATH=$PATH:/usr/bin pm2 startup upstart -u ubuntu --hp /home/ubuntu/node-app/node_modules/movie-analyst-api
 
     - name: PM2 startup configuration (pm2 start)
       command: pm2 start bin/www --name="node-app"
       args:
-        chdir: /home/ubuntu/node-app/
+        chdir: /home/ubuntu/node-app/node_modules/movie-analyst-api
 
     - name: PM2 startup configuration (pm2 save)
       command: pm2 save
