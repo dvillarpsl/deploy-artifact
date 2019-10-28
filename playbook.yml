@@ -44,6 +44,7 @@
       command: ls -l /home/ubuntu/node-app/
 
     - name: Starting the APP
+      become: true
       command: forever start server.js
       when: "forever_list.stdout.find('server.js') == -1"
       args:
