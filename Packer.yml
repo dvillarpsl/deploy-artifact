@@ -13,13 +13,20 @@
                 "/usr/bin/apt-get update",
                 "/usr/bin/apt-get -y install ansible",
                 "mkdir /home/ubuntu/node-app",
-                "chown ubuntu:ubuntu /home/ubuntu/node-app"
+                "mkdir /var/www/nodejs",
+                "chown ubuntu:ubuntu /home/ubuntu/node-app",
+                "chown ubuntu:ubuntu /var/www/nodejs"
             ]
         },
         {
             "type": "file",
             "source": "package/movie-analyst-api-1.0.0.tgz",
             "destination": "/home/ubuntu/node-app/"
+        },
+        {
+            "type": "file",
+            "source": "package/movie-analyst-api-1.0.0.tgz",
+            "destination": "/var/www/nodejs"
         },
         {
             "type": "ansible-local",
