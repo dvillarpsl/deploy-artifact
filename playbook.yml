@@ -1,14 +1,9 @@
 ---
 - hosts: all
+  vars:
+    project_path: /var/www/nodejs
 
   tasks:
-
-    - name: Install the gpg key for nodejs LTS
-      become: true
-      apt_key:
-        url: "http://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-        state: present
-        validate_certs: no
 
     - name: Install the nodejs LTS repos
       become: true
@@ -25,28 +20,44 @@
     
     - name: Install PM2
       become: true
-      command: npm install -g pm2
-
-    - name: "Install forever (to run Node.js app)."
-      become: true
-      npm: name=forever global=yes state=present
-
-    - name: "Check list of Node.js apps running."
-      command: forever list
-      register: forever_list
-      changed_when: false
+      npm: name=pm2 global=yes state=present
     
-    - name: Install APP tar
-      become: true
-      command: chdir=/home/ubuntu/node-app/ npm install movie-analyst-api-1.0.0.tgz -f
-
-    - name: Listing files node-app
-      become: true
-      command: ls -l /home/ubuntu/node-app/
-
-    - name: Starting the APP
-      become: true
-      command: forever start server.js
-      when: "forever_list.stdout.find('server.js') == -1"
+    - name: Set some variable
+      set_fact:
+        release_path: "{{ project_path }}/releases/{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+        current_path: "{{ project_path }}/current"
+    
+    - name: Retrieve current release folder
+      command: readlink -f current
+      register: current_release_path
+      ignore_errors: yes
       args:
-        chdir: /home/ubuntu/node-app/node_modules/movie-analyst-api
+        chdir: "{{ project_path }}"
+
+    - name: Create new folder
+      file:
+        dest={{ release_path }}
+        mode=0755
+        recurse=yes
+        state=directory
+    - name: Clone the repository
+      git:
+        repo: git@github.com:dvillarpsl/movie-analyst-api.git
+        dest: "{{ release_path }}"
+        clone: yes
+    - name: Update npm
+      npm:
+        path={{ release_path }}
+    - name: Update symlink
+      file:
+        src={{ release_path }}
+        dest={{ current_path }}
+        state=link
+    - name: Delete old pm2 process
+      command: pm2 delete ws-node
+      ignore_errors: yes
+    - name: Start pm2
+      command: pm2 start {{ current_path }}/server.js --name node-app
+    - name: Delete old dir
+      shell: rm -rf {{ current_release_path.stdout }}/
+      when: current_release_path.stdout != current_path
