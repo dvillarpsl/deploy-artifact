@@ -32,7 +32,7 @@
     - name: Install APP tar
       become: true
       npm:
-        name: "/home/ubuntu/node-app/node_modules/movie-analyst-api/movie-analyst-api-1.0.0.tgz"
+        name: "/home/ubuntu/node-app/movie-analyst-api-1.0.0.tgz"
         global: yes
 
     - name: Listing files node-app
