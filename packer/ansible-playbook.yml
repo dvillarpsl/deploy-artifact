@@ -1,5 +1,7 @@
 ---
 - hosts: all
+  vars:
+    project_path: /home/ubuntu/node-app/node_modules/movie-analyst-api
 
   tasks:
 
@@ -25,28 +27,25 @@
     
     - name: Install PM2
       become: true
-      command: npm install -g pm2
-
-    - name: "Install forever (to run Node.js app)."
-      become: true
-      npm: name=forever global=yes state=present
-
-    - name: "Check list of Node.js apps running."
-      command: forever list
-      register: forever_list
-      changed_when: false
+      npm: name=pm2 global=yes state=present
     
     - name: Install APP tar
       become: true
-      command: chdir=/home/ubuntu/node-app/ npm install movie-analyst-api-1.0.0.tgz -f
+      chdir: {{project_path}}
+      command: npm install movie-analyst-api-1.0.0.tgz -f
 
     - name: Listing files node-app
       become: true
-      command: ls -l /home/ubuntu/node-app/
+      command: ls -l {{ current_path }}
 
-    - name: Starting the APP
+    - name: Installing the app
       become: true
-      command: forever start server.js
-      when: "forever_list.stdout.find('server.js') == -1"
-      args:
-        chdir: /home/ubuntu/node-app/node_modules/movie-analyst-api
+      npm:
+        path: {{ current_path }}
+
+    - name: Delete old pm2 process
+      command: pm2 delete ws-node
+      ignore_errors: yes
+
+    - name: Start pm2
+      command: pm2 start {{ current_path }}/server.js --name node-app
