@@ -31,21 +31,21 @@
     
     - name: Install APP tar
       become: true
-      chdir: "{{project_path}}"
+      chdir: /home/ubuntu/node-app/node_modules/movie-analyst-api
       command: npm install movie-analyst-api-1.0.0.tgz -f
 
     - name: Listing files node-app
       become: true
-      command: ls -l {{ current_path }}
+      command: ls -l /home/ubuntu/node-app/node_modules/movie-analyst-api
 
     - name: Installing the app
       become: true
       npm:
-        path: "{{ current_path }}"
+        path: /home/ubuntu/node-app/node_modules/movie-analyst-api
 
     - name: Delete old pm2 process
       command: pm2 delete ws-node
       ignore_errors: yes
 
     - name: Start pm2
-      command: pm2 start {{ current_path }}/server.js --name node-app
+      command: pm2 start /home/ubuntu/node-app/node_modules/movie-analyst-api/server.js --name node-app
