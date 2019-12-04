@@ -27,6 +27,10 @@ resource "aws_launch_configuration" "node_api_lc" {
   image_id      = "${data.aws_ami.node_api_ami.id}"
   instance_type = "t2.micro"
   security_groups = ["sg-05847656e7c743df0"]
+  user_data = <<-EOF
+              #!/bin/bash
+              pm2 start /home/ubuntu/node-app/node_modules/movie-analyst-api/server.js --name node-app
+              EOF
   lifecycle {
     create_before_destroy = true
   }
