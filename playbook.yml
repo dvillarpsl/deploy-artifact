@@ -32,4 +32,4 @@
       ignore_errors: yes
 
     - name: Start pm2
-      command: pm2 start {{ current_path }}/server.js --name node-app
+      command: pm2 start /home/ubuntu/node-app/node_modules/movie-analyst-api/server.js --name node-app

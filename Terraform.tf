@@ -7,7 +7,7 @@ provider "aws" {
   region     = "us-east-1"
 }
 
-data "aws_ami" "node_app_ami" {
+data "aws_ami" "node_api_ami" {
   most_recent = true
 
   filter {
@@ -20,22 +20,22 @@ data "aws_ami" "node_app_ami" {
     values = ["hvm"]
   }
 
-  owners = ["099720109477"]
+  owners = ["961518039473"]
 }
 
-resource "aws_launch_configuration" "node_app_lc" {
-  image_id      = "${data.aws_ami.node_app_ami.id}"
+resource "aws_launch_configuration" "node_api_lc" {
+  image_id      = "${data.aws_ami.node_api_ami.id}"
   instance_type = "t2.micro"
-  security_groups = ["${aws_security_group.node_app_websg.id}"]
+  security_groups = ["sg-05847656e7c743df0"]
   lifecycle {
     create_before_destroy = true
   }
 }
 
-resource "aws_autoscaling_group" "node_app_asg" {
-  name                 = "terraform-asg-node-app-${aws_launch_configuration.node_app_lc.name}"
-  launch_configuration = "${aws_launch_configuration.node_app_lc.name}"
-  availability_zones = ["${data.aws_availability_zones.allzones.names}"]
+resource "aws_autoscaling_group" "node_api_asg" {
+  name                 = "terraform-asg-node-app-${aws_launch_configuration.node_api_lc.name}"
+  launch_configuration = "${aws_launch_configuration.node_api_lc.name}"
+  availability_zones = ["us-east-1"]
   min_size             = 1
   max_size             = 2
 
@@ -45,9 +45,19 @@ resource "aws_autoscaling_group" "node_app_asg" {
   lifecycle {
     create_before_destroy = true
   }
+  tag {
+    key                 = "responsible"
+    value               = "dvillar"
+    propagate_at_launch = true
+  }
+  tag {
+    key                 = "project"
+    value               = "rampup_dvillar"
+    propagate_at_launch = true
+  }
 }
 
-resource "aws_security_group" "node_app_websg" {
+/* resource "aws_security_group" "node_app_websg" {
   name = "security_group_for_node_app_websg"
   ingress {
     from_port = 3000
@@ -59,7 +69,7 @@ resource "aws_security_group" "node_app_websg" {
   lifecycle {
     create_before_destroy = true
   }
-}
+} */
 
 resource "aws_security_group" "elbsg" {
   name = "security_group_for_elb"
@@ -80,13 +90,15 @@ resource "aws_security_group" "elbsg" {
   lifecycle {
     create_before_destroy = true
   }
+  tags {
+    "responsible" = "dvillar"
+    "project" = "rampup_dvillar"
+  }
 }
 
-data "aws_availability_zones" "allzones" {}
-
 resource "aws_elb" "elb1" {
-  name = "terraform-elb-node-app"
-  availability_zones = ["${data.aws_availability_zones.allzones.names}"]
+  name = "terraform-elb-node-api"
+  availability_zones = ["us-east-1"]
   security_groups = ["${aws_security_group.elbsg.id}"]
   
   listener {
@@ -110,6 +122,6 @@ resource "aws_elb" "elb1" {
   connection_draining_timeout = 400
 
   tags {
-    Name = "terraform - elb - node-app"
+    Name = "PSL RampUp ELB dvillar"
   }
 }
